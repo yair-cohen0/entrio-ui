@@ -26,7 +26,7 @@ export class AppComponent {
     })
   }
 
-  public currentItem: any = new Subject();
+  public currentItem: Subject<Repository> = new Subject();
 
   public selectedRow(repoId: number) {
     this.repositoriesService.getRepositoryById(repoId).subscribe({

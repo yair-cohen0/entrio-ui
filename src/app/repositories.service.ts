@@ -11,15 +11,15 @@ export class RepositoriesService {
   private apiUrl = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
 
-  getRepositories(): Observable<any[]> {
+  getRepositories(): Observable<Repository[]> {
     return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
-  getRepositoryById(id: number): Observable<any> {
+  getRepositoryById(id: number): Observable<Repository> {
     return this.http.get<any>(`${this.apiUrl}/${id}?type=id`);
   }
 
-  getRepositoryByName(name: string): Observable<any> {
+  getRepositoryByName(name: string): Observable<Repository> {
     return this.http.get<any>(`${this.apiUrl}/name/${name}?type=name`);
   }
 }
