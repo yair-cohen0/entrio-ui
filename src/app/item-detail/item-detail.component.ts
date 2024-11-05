@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, SimpleChanges} from '@angular/core';
 import {AsyncPipe, NgIf} from '@angular/common';
 import {Repository} from '../../types/repository';
 import {Subject} from 'rxjs';
@@ -18,5 +18,5 @@ export class ItemDetailComponent {
   }
 
   @Input('item')
-  item$: Subject<Repository> = new Subject();
+  item: Repository | null = null;
 }

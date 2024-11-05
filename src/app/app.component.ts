@@ -3,7 +3,7 @@ import {RouterOutlet} from '@angular/router';
 import {ItemComponent} from './item/item.component';
 import {AsyncPipe, NgForOf} from '@angular/common';
 import {SearchBarComponent} from './search-bar/search-bar.component';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {RepositoriesService} from './repositories.service';
 import {ItemDetailComponent} from './item-detail/item-detail.component';
 import {Repository} from '../types/repository';
@@ -30,11 +30,12 @@ export class AppComponent {
     })
   }
 
-  public currentItem$ = new Subject<Repository>();
+  private currentItem = new BehaviorSubject<Repository | null>(null);
+  public currentItem$ = this.currentItem.asObservable();
 
   public searchById(repoId: number) {
     this.repositoriesService.getRepositoryById(repoId).subscribe({
-      next: (repo) => this.currentItem$.next(repo),
+      next: (repo) => this.currentItem.next(repo),
       error: (error) => console.error('Error fetching repository:', error)
     })
   };
@@ -42,7 +43,7 @@ export class AppComponent {
   public searchByName(repoName: string) {
     this.repositoriesService.getRepositoryByName(repoName).subscribe({
       next: (repo) => {
-        this.currentItem$.next(repo);
+        this.currentItem.next(repo);
         this.fetchRepositories();
       },
       error: (error) => console.error('Error fetching repository:', error)
