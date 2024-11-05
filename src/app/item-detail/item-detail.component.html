@@ -1,0 +1,9 @@
+<div *ngIf="item$ | async as item">
+  <h2>{{ item.name }}</h2>
+  <p><strong>Owner:</strong> {{ item.owner }}</p>
+  <p><strong>Stars:</strong> {{ item.stars }}</p>
+  <p><strong>Forks:</strong> {{ item.forks }}</p>
+  <p><strong>Description:</strong> {{ item.description }}</p>
+  <p><strong>Languages:</strong> {{ item.languages }}</p>
+  <p><strong>Topics:</strong> {{ item.topics.join(', ') }}</p>
+</div>

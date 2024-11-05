@@ -1,5 +1,5 @@
 <div class="search-row">
-  <input placeholder="search value" type="text">
-  <button>name</button>
-  <button>id</button>
+  <input #input placeholder="search value" type="text">
+  <button (click)="searchByName.emit(input.value)">name</button>
+  <button (click)="searchById.emit(+input.value)">id</button>
 </div>

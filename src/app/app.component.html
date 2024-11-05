@@ -1,9 +1,11 @@
 <div class="page-wrapper">
-  <search-bar></search-bar>
+  <search-bar (searchById)="searchById($event)" (searchByName)="searchByName($event)"></search-bar>
   <div class="bottom-row">
     <section class="repo-scroll">
-      <item *ngFor="let repo of repositories | async" [name]="repo.name" [id]="repo.repoId" (selected)="selectedRow($event)" ></item>
+      <item *ngFor="let repo of repositories | async" [name]="repo.name" [id]="repo.repoId"
+            (selected)="searchById($event)"></item>
     </section>
+    <item-detail [item]="currentItem$"></item-detail>
   </div>
 </div>
 

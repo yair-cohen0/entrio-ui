@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'search-bar',
@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './search-bar.component.scss'
 })
 export class SearchBarComponent {
+  @Output('searchByName')
+  searchByName = new EventEmitter<string>();
 
+  @Output('searchById')
+  searchById = new EventEmitter<number>();
 }

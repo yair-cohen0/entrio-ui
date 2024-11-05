@@ -20,6 +20,6 @@ export class RepositoriesService {
   }
 
   getRepositoryByName(name: string): Observable<Repository> {
-    return this.http.get<any>(`${this.apiUrl}/name/${name}?type=name`);
+    return this.http.get<any>(`${this.apiUrl}/${name}?type=name`);
   }
 }

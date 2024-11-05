@@ -26,11 +26,18 @@ export class AppComponent {
     })
   }
 
-  public currentItem: Subject<Repository> = new Subject();
+  public currentItem$ = new Subject<Repository>();
 
-  public selectedRow(repoId: number) {
+  public searchById(repoId: number) {
     this.repositoriesService.getRepositoryById(repoId).subscribe({
-      next: (repo) => this.currentItem.next(repo),
+      next: (repo) => this.currentItem$.next(repo),
+      error: (error) => console.error('Error fetching repository:', error)
+    })
+  };
+
+  public searchByName(repoName: string) {
+    this.repositoriesService.getRepositoryByName(repoName).subscribe({
+      next: (repo) => this.currentItem$.next(repo),
       error: (error) => console.error('Error fetching repository:', error)
     })
   };
