@@ -19,7 +19,11 @@ export class AppComponent {
 
   public repositories = new Subject<Repository[]>()
 
-  constructor(private readonly repositoriesService: RepositoriesService ) {
+  constructor(private readonly repositoriesService: RepositoriesService) {
+    this.fetchRepositories()
+  }
+
+  private fetchRepositories(): void {
     this.repositoriesService.getRepositories().subscribe({
       next: (repos) => this.repositories.next(repos),
       error: (error) => console.error('Error fetching repositories:', error)
@@ -37,7 +41,10 @@ export class AppComponent {
 
   public searchByName(repoName: string) {
     this.repositoriesService.getRepositoryByName(repoName).subscribe({
-      next: (repo) => this.currentItem$.next(repo),
+      next: (repo) => {
+        this.currentItem$.next(repo);
+        this.fetchRepositories();
+      },
       error: (error) => console.error('Error fetching repository:', error)
     })
   };
